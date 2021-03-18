@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>ASL-Map</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="container">
+			<div class="modal" id="modal">
+				<div class="creatPoint">
+					<label for="namePoint">Название:</label>
+					<br>
+					<textarea type="text" id="namePoint"></textarea>
+					<br>
+					<label for="textPoint">Описание:</label>
+					<br>
+					<textarea type="text" id="textPoint"></textarea>
+					<br><br>
+					<input id="coordPointX" type="text" style="display:none;" readonly>
+					<input id="coordPointY" type="text" style="display:none;" readonly">
+					<input id="positionBlockPointX" type="text" style="display:none;" readonly>
+					<input id="positionBlockPointY" type="text" style="display:none;" readonly>
+					<label for="colorPoint">Цвет:</label><br>
+					<input type="color" list="colorList" id="colorPoint" value="#FFFB00">
+					<datalist id="colorList">
+						<option value="#FFFB00" label="Желтый">
+						<option value="#ff0000" label="Красный">
+						<option value="#FFA200" label="Оранжевый">
+						<option value="#008000" label="Зелёный">
+						<option value="#0000ff" label="Синий">
+						<option value="#C300FF" label="Фиолетовый">
+						<option value="#ffffff" label="Белый">
+						<option value="#cccccc" label="Серый">
+						<option value="#000000" label="Черный">
+					</datalist>
+					<button id="button_creat">Создать чекпоинт</button>
+					<br>
+					<a class="modal-close" href="#">Закрыть</a>
+				</div>
+			</div>
+			<map class="wrap" id="wrap">	
+				<img class="maping" id="map2d" src="https://github.com/NekitSan/ASL_std./blob/master/asl-mapping.ru/www/imager/maps/min/oldmedievalminecraft2-min.jpg?raw=true" alt="map - 2d">
+			</map>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.0.js" type="text/javascript"></script>
+	<script src="scripts/js-scripts/script.js" type="text/javascript"></script>
+</body>
+</html>
