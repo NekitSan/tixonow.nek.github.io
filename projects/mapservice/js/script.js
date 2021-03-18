@@ -21,19 +21,23 @@ const map = {
 const maxcoord = 4480;
 
 // open pop up edit && delete point
-FIELD.addEventListener("mouseover", (e) => {
-	if (e.target.classList.contains("point")) {
-		e.target.addEventListener("click", () => {
+FIELD.addEventListener("mouseover", (event) => {
+	if (event.target.classList.contains("point")) {
+		event.target.addEventListener("click", (elem) => {
 			MODALWIDOW.classList.add("modal__point");
 			buttonCreatPoint.style.display = "none";
 			namePoint.value = getCookie("title");
-			textPoint.value = e.target.textContent;
+			textPoint.value = event.target.textContent;
 			colorPoint.value = getCookie("color");
 
-			MODALWIDOW.querySelector(".buttons").innerHTML =
-				`<button class="button__edit add__button">Изменить</button>
-			<button class="button__dell add__button">Удалить точку</button>`;
+			// MODALWIDOW.querySelector(".buttons").innerHTML =
+			// 	`<button class="button__edit add__button">Изменить</button>
+			// <button class="button__dell add__button">Удалить точку</button>`;
 			MODAL.classList.remove(MODALDISABLE);
+
+			// console.log(elem.getAttribute("id"));
+			console.log(elem);
+
 		});
 	}
 });
@@ -128,7 +132,7 @@ function creatPoint() {
 		 
 		data-coord-x="${getCookie("coordX")}" 
 		data-coord-y="${getCookie("coordY")}">
-		${getCookie("text")}</div>`
+		${ getCookie("text")}</div>`
 	);
 }
 
