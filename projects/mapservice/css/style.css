@@ -40,11 +40,10 @@ ul,li {
 
 .wrapper {
 	position: relative;
-	padding: 5%;
+	padding: 60px;
 }
 
 .container {
-	position: relative;
 	max-width: 1120px;
 	max-height: 562px;
 	margin: 0 auto;
@@ -57,11 +56,18 @@ map {
 	max-width: inherit;
 	max-height: inherit;
 }
-map img {
+
+.wrap__container {
+	position: relative;
+	width: 560px;
+	height: 560px;
+	margin: 0 auto;
+	cursor: crosshair;
+}
+.wrap__image {
 	position: relative;
 	max-width: inherit;
 	max-height: inherit;
-	margin: 0 auto;
 	z-index: 1000;
 	/* Zoom 
 	-moz-transition: all 1.5s ease-out;
@@ -74,14 +80,7 @@ map img {
 	display: block;
 }
 
-#map3d {
-	display: none;
-}
-
-.modal {
-	display: none;
-}
-.modal:before {
+.pop_up__background:before {
 	content: '';
 	background: #000;
 	position: fixed; 
@@ -92,11 +91,15 @@ map img {
 	opacity: 0.7;
 	z-index: 9999;
 }
-.creatPoint {
+
+.pop_up--disable {
+	display: none;
+}
+
+.pop_up {
 	position: fixed;
 	top: 20%;
 	left: 50%;
-	padding: 20px;
 	width: 360px;
 	margin-left: -200px;	
 	background: #fff;
@@ -106,30 +109,134 @@ map img {
 	z-index: 99999;
 	opacity: 1;	
 }
-.modal-close {
+
+.modal {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+}
+
+.button__close {
 	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 0;
+	right: 0;
+	transform: translate(50%, -50%);
+	width: 32px;
+	height: 32px;
+	border: 0;
+	border-radius: 50%;
+	background-color: red;
+	cursor: pointer;
+}
+.button__close::before {
+	content: "";
+	position: absolute;
+	top: 15px;
+	right: 0;
+	transform: rotate(45deg);
+	height: 2px;
+	width: 32px;
+	background-color: #fff;
+}
+.button__close::after {
+	content: "";
+	position: absolute;
+	top: 15px;
+	right: 0;
+	transform: rotate(-45deg);
+	height: 2px;
+	width: 32px;
+	background-color: #fff;
+}
+
+.button__creat {
+    padding: 5px 7px;
+	background-color: #6faf6b;
+	color: #fff;
+	border: 0;
 	cursor: pointer;
 }
 
-#button_creat {
-	background-color: #040C2C;
-	color: #fff;
+.button__creat:hover {
+	background-color: #21ab18;
 }
 
-#button_creat:hover {
-	background-color: #343A54;
+.buttons {
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
 }
+.modal__point .buttons {
+	position: static;
+	visibility: visible;
+	opacity: 1;
+}
+
+.add__button {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+    padding: 3px 5px;
+	cursor: pointer;
+}
+
+.button__edit {
+	bottom: 45px;
+	color: #1bbdff;
+}
+
+.button__dell {
+	color: #d74040;
+}
+
+.add__coord {
+	position: absolute;
+	right: 0;
+	padding-right: 10px;
+	top: 70px;
+}
+.coord_x {
+	top: 40px;
+}
+
 
 .point {
 	display: block;
 	position: absolute;
+	top: 0;
+	left: 0;
 	width: 7px;
 	height: 7px;
+	overflow: hidden;
+	color: transparent;
 	transform: translate(-50%, -50%);
 	border-radius: 50%;
 	cursor: help;
 	font-size: 0;
 	z-index: 1001;
+}
+
+header.container {
+	position: relative;
+	border: 0;
+}
+
+nav {
+	position: absolute;
+	background-color: #808080;
+	z-index: 9999;
+}
+
+.page__home__link {
+    color: #4f4f4f;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.disable {
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
 }

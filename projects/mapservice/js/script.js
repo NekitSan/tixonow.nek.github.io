@@ -1,170 +1,174 @@
-document.querySelector(".wrap").oncontextmenu = cmenu; function cmenu() { return false; }
-
-$(document).ready(function() {
-	$("#map2d").contextmenu(function(e){
-		let parentOffset = $(this).parent().offset(); 
-		let relX = (e.pageX - parentOffset.left) - 278;
-		let relY = (e.pageY - parentOffset.top) + 2;
-
-		let editValueInput = new editIput(relX, relY);
-		editValueInput.editAndOutInInput();
-
-		$('.modal').fadeIn();
-	});
-
-	let titlePoint = $("#namePoint").val();
-	let contentPoint = $("#textPoint").val();
-	let coordXPoint = $("#coordPointX").val();
-	let coordYPoint = $("#coordPointY").val();
-	let positionBlockPointX = $("#positionBlockPointX").val();
-	let positionBlockPointY = $("#positionBlockPointY").val();
-	let colorPoint = $("#colorPoint").val();
-
-	let numbId = 0;
-
-	$("#button_creat").on("click", function(){
-		console.log("suka", positionBlockPointX);
-		//<div class="point" style="left: ${valueIDInout.positionBlockPointX}px; top: ${valueIDInout.coordBlockYPoint}px; background-color: ${valueIDInout.colorPoint};" title=" id="${valueIDInout.contentPoint}""></div>
-
-		// return numbId++;
-		// $.ajax({
-        //     url: "scripts/php-scripts/points/creatpoint.php",
-        //     type: "POST",
-        //     data: ({
-        //         title: valueIDInout.titlePoint,
-        //         content: valueIDInout.contentPoint,
-        //         coordX: valueIDInout.coordXPoint,
-        //         coordY: valueIDInout.coordYPoint,
-        //         coordBlockPointX: valueIDInout.coordBlockXPoint,
-        //         coordBlockPointY: valueIDInout.coordBlockYPoint,
-        //         color: valueIDInout.colorPoint
-        //     }),
-        //     dataType: "html",
-        //     success: reloding
-        // });
-		
-		$(this).parents('.modal').fadeOut();
-    	clearInput();
-		return false;
-	});
-
-	$('.modal-close').click(function() {
-		$(this).parents('.modal').fadeOut();
-    	clearInput();
-		return false;
-	});	
-
-});
-
-function deletePointBD()
-{ 
-	$(".pointDelete").on('click', function(){
-		let idPoint = $(this).attr('id');
-		$.ajax({
-            url: "scripts/php-scripts/points/deletepoint.php",
-			type: "POST",
-			data: ({
-				id: idPoint
-			}),
-			dataType: "text",
-			success: reloding
-		});
-		return false;
-	});
-	
+document.querySelector(".wrap").oncontextmenu = () => {
+	return false;
 }
+const MODAL = document.querySelector(".pop_up__background");
+const MODALWIDOW = document.querySelector(".modal");
+const FIELD = document.querySelector(".wrap__container");
+const MODALDISABLE = "pop_up--disable";
 
-function reloding()
-{
-	setTimeout(() => {
-		clearInput();
-	}, 1000);
-   console.log("Запустился!");
-   //setTimeout(location.reload(),0);
-}
+const closeCreatForm = document.querySelector(".button__close");
+const buttonCreatPoint = document.querySelector(".button__creat");
 
-function clearInput()
-{
-	$("#namePoint").val('');
-	$("#textPoint").val('');
-}
+let namePoint = document.querySelector("#namePoint");
+let textPoint = document.querySelector("#textPoint");
+let colorPoint = document.querySelector("#colorPoint");
+addCoockie("id", 0);
 
-class editIput
-{
-	constructor(coordX, coordY)
-	{
-		this.relX = coordX;
-		this.relY = coordY;
-	}
-	editAndOutInInput()
-	{
-		let coord = new calcRealCoord(this.relX, this.relY);
-		let trueCoord = coord.creaetRealCoord();
-
-		let CoordBlockPointX = (this.relX + 278);
-		let CoordBlockPointY = (this.relY + 2);
-
-		$("#coordPointX").val(trueCoord[0]);
-		$("#coordPointY").val(trueCoord[1]);
-		$("#namePoint").val(CoordBlockPointX);
-		$("#textPoint").val(CoordBlockPointY);
-		
-		console.log(trueCoord[0],trueCoord[1],'\n',CoordBlockPointX,CoordBlockPointY);
-	}
-}
-
-class calcRealCoord
-{
-	constructor(realcoordX, realcoordY)
-	{
-		this.realcoordX = 1 * (realcoordX);
-		this.realcoordY = 1 * (realcoordY);
-	}
-	creaetRealCoord()
-	{
-	//console.log("X: ",this.realcoordX, "\nY: ",this.realcoordY);
-
-	let tmpX = map2d.coordX * 1.00 - ((this.realcoordX * 8) * 2);
-	tmpX = (tmpX - map2d.coordX) * -1;
-	//console.log("noEdit_X: ", tmpX);
-	tmpX = editCoord(tmpX);
-	tmpX = tmpX.toFixed(0);
-
-	let tmpY = map2d.coordY * 1.00 - ((this.realcoordY * 8) * 2);
-	tmpY = (tmpY - map2d.coordY) * -1;
-	//console.log("noEdit_Y: ", tmpY);
-	tmpY = editCoord(tmpY);
-	tmpY = tmpY.toFixed(0);
-
-
-    return [tmpX, tmpY];
-	}
-}
-
-const maxcoord = 4480;
-
-let map2d = {  
+const map = {
 	coordX: 8960.0,
 	coordY: 8960.0
 };
+const maxcoord = 4480;
 
-let map3d = {
-	coordX: 17920.0,
-	coordY: 9215.0
-};
+// open pop up edit && delete point
+FIELD.addEventListener("mouseover", (e) => {
+	if (e.target.classList.contains("point")) {
+		e.target.addEventListener("click", () => {
+			MODALWIDOW.classList.add("modal__point");
+			buttonCreatPoint.style.display = "none";
+			namePoint.value = getCookie("title");
+			textPoint.value = e.target.textContent;
+			colorPoint.value = getCookie("color");
 
-function editCoord(a)
-{
+			MODALWIDOW.querySelector(".buttons").innerHTML =
+				`<button class="button__edit add__button">Изменить</button>
+			<button class="button__dell add__button">Удалить точку</button>`;
+			MODAL.classList.remove(MODALDISABLE);
+		});
+	}
+});
 
-	if(a > maxcoord) {
-		return test = (a - maxcoord);
+// open pop up creat point
+FIELD.addEventListener("contextmenu", (e) => {
+	if (!e.target.classList.contains("point")) {
+		let x = e.pageX - 339;
+		let y = e.pageY - 61;
+		let coords = creatCord(x, y);
+
+		addCoockie("coordX", coords[0]);
+		addCoockie("coordY", coords[1]);
+
+		addCoockie("positX", x);
+		addCoockie("positY", y);
+
+		document.querySelector(".coord__number--x").textContent = coords[0];
+		document.querySelector(".coord__number--y").textContent = coords[1];
+
+		MODAL.classList.toggle(MODALDISABLE);
+		if (MODALWIDOW.classList.contains("modal__point"))
+			MODALWIDOW.classList.remove("modal__point");
 	}
-		else if(a < maxcoord)
-	{
-		return test = (maxcoord - a) * -1;
+});
+
+// close pop up && creat point
+buttonCreatPoint.addEventListener("click", () => {
+	addCoockie("title", namePoint.value);
+	addCoockie("text", textPoint.value);
+	addCoockie("color", colorPoint.value);
+	addCoockie("id", (1 * getCookie("id")) + 1);
+
+	creatPoint();
+	MODAL.classList.toggle(MODALDISABLE);
+	nullInputs();
+
+	if (MODALWIDOW.classList.contains("modal__point"))
+		MODALWIDOW.classList.remove("modal__point");
+});
+
+// close pop up
+closeCreatForm.addEventListener("click", () => {
+	MODAL.classList.toggle(MODALDISABLE);
+	nullInputs();
+
+	if (MODALWIDOW.classList.contains("modal__point")) {
+		MODALWIDOW.classList.remove("modal__point");
+		buttonCreatPoint.style.display = "inline-block";
 	}
-		else if(a == maxcoord)
-	{
-		return test = 0;
+});
+
+// close pop up
+document.querySelector(".pop_up__background").addEventListener("click", (e) => {
+	if (e.target.classList.contains("pop_up__background")) {
+		MODAL.classList.add(MODALDISABLE);
+		nullInputs();
+		if (MODALWIDOW.classList.contains("modal__point")) {
+			MODALWIDOW.classList.remove("modal__point");
+			buttonCreatPoint.style.display = "inline-block";
+		}
 	}
+});
+
+// close pop up
+document.body.addEventListener("keyup", function (e) {
+	var key = e.keyCode;
+
+	if (key == 27) {
+		if(MODAL.classList.contains(MODALDISABLE) == false)
+		{
+			MODAL.classList.add(MODALDISABLE);
+			nullInputs();
+			if (MODALWIDOW.classList.contains("modal__point")) {
+				MODALWIDOW.classList.remove("modal__point");
+				buttonCreatPoint.style.display = "inline-block";
+			}
+		}
+	};
+}, false);
+
+function creatPoint() {
+	FIELD.insertAdjacentHTML(
+		"afterbegin",
+		`<div class="point" 
+		id="id-${getCookie("id")}" 
+		style="
+		left: ${getCookie("positX")}px; 
+		top: ${getCookie("positY")}px; 
+		background-color: ${getCookie("color")};" 
+		title="${getCookie("title")}" 
+		 
+		data-coord-x="${getCookie("coordX")}" 
+		data-coord-y="${getCookie("coordY")}">
+		${getCookie("text")}</div>`
+	);
+}
+
+function editCoord(position) {
+	if (position > maxcoord) {
+		return (position - maxcoord);
+	} else if (position < maxcoord) {
+		return (maxcoord - position) * -1;
+	} else if (position == maxcoord) {
+		return 0;
+	}
+}
+
+function creatCord(positionX, positionY) {
+	let tempX = map.coordX * 1.00 - ((positionX * 8) * 2);
+	tempX = (tempX - map.coordX) * -1;
+	tempX = editCoord(tempX);
+	tempX = tempX.toFixed(0);
+
+	let tempY = map.coordY * 1.00 - ((positionY * 8) * 2);
+	tempY = (tempY - map.coordY) * -1;
+	tempY = editCoord(tempY);
+	tempY = tempY.toFixed(0);
+
+	return [tempX, tempY];
+}
+
+function addCoockie(name, value) {
+	document.cookie = name + '=' + value;
+}
+
+function getCookie(name) {
+	let matches = document.cookie.match(new RegExp(
+		"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+	));
+	return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+function nullInputs() {
+	namePoint.value = "";
+	textPoint.value = "";
+	colorPoint.value = "#FFFB00";
 }

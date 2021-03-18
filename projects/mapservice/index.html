@@ -7,46 +7,52 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<header class="container">
+		<nav>
+			<a class="page__home__link" href="../../index.html">На главную</a>
+		</nav>
+	</header>
 	<div class="wrapper">
 		<div class="container">
-			<div class="modal" id="modal">
-				<div class="creatPoint">
-					<label for="namePoint">Название:</label>
-					<br>
-					<textarea type="text" id="namePoint"></textarea>
-					<br>
-					<label for="textPoint">Описание:</label>
-					<br>
-					<textarea type="text" id="textPoint"></textarea>
-					<br><br>
-					<input id="coordPointX" type="text" class="disavle" readonly>
-					<input id="coordPointY" type="text" class="disavle" readonly>
-					<input id="positionBlockPointX" type="text" class="disavle" readonly>
-					<input id="positionBlockPointY" type="text" class="disavle" readonly>
-					<label for="colorPoint">Цвет:</label><br>
-					<input type="color" list="colorList" id="colorPoint" value="#FFFB00">
-					<datalist id="colorList">
-						<option value="#FFFB00" label="Желтый">
-						<option value="#ff0000" label="Красный">
-						<option value="#FFA200" label="Оранжевый">
-						<option value="#008000" label="Зелёный">
-						<option value="#0000ff" label="Синий">
-						<option value="#C300FF" label="Фиолетовый">
-						<option value="#ffffff" label="Белый">
-						<option value="#cccccc" label="Серый">
-						<option value="#000000" label="Черный">
-					</datalist>
-					<button id="button_creat">Создать чекпоинт</button>
-					<br>
-					<a class="modal-close" href="#">Закрыть</a>
+			<div class="pop_up__background pop_up--disable">
+				<div class="pop_up">
+					<div class="modal">
+						<label for="namePoint">Название:</label>
+						<br>
+						<textarea type="text" id="namePoint"></textarea>
+						<br>
+						<label for="textPoint">Описание:</label>
+						<br>
+						<textarea type="text" id="textPoint"></textarea>
+						<br><br>
+						<label for="colorPoint">Цвет:</label><br>
+						<input type="color" list="colorList" id="colorPoint" value="#FFFB00">
+						<datalist id="colorList">
+							<option value="#FFFB00" label="Желтый">
+							<option value="#ff0000" label="Красный">
+							<option value="#FFA200" label="Оранжевый">
+							<option value="#008000" label="Зелёный">
+							<option value="#0000ff" label="Синий">
+							<option value="#C300FF" label="Фиолетовый">
+							<option value="#ffffff" label="Белый">
+							<option value="#cccccc" label="Серый">
+							<option value="#000000" label="Черный">
+						</datalist>
+						<div class="coord_x add__coord">x: <span class="coord__number--x">0</span></div>
+						<div class="coord_y add__coord">y: <span class="coord__number--y">0</span></div>
+						<button class="button__close"></button>
+						<button class="button__creat">Создать точку</button>
+						<div class="buttons"></div>
+					</div>
 				</div>
 			</div>
 			<map class="wrap" id="wrap">	
-				<img class="maping" id="map2d" src="https://github.com/NekitSan/ASL_std./blob/master/asl-mapping.ru/www/imager/maps/min/oldmedievalminecraft2-min.jpg?raw=true" alt="map - 2d">
+				<div class="wrap__container">
+					<img class="wrap__image" id="map2d" src="https://github.com/NekitSan/ASL_std./blob/master/asl-mapping.ru/www/imager/maps/min/oldmedievalminecraft2-min.jpg?raw=true" alt="map - 2d">
+				</div>
 			</map>
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.5.0.js" type="text/javascript"></script>
 	<script src="js/script.js" type="text/javascript"></script>
 </body>
 </html>
