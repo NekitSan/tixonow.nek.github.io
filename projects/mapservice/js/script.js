@@ -2,16 +2,15 @@ document.querySelector(".wrap").oncontextmenu = () => {
 	return false;
 }
 const MODAL = document.querySelector(".pop_up__background");
-const MODALWIDOW = document.querySelector(".modal");
+const MODAL_WIDOW = document.querySelector(".modal");
 const FIELD = document.querySelector(".wrap__container");
-const MODALDISABLE = "pop_up--disable";
+const MODAL_DISABLE = "pop_up--disable";
+const LEFT_INDENT = 339;
+const TOP_INDENT = 61;
 
 const closeCreatForm = document.querySelector(".button__close");
 const buttonCreatPoint = document.querySelector(".button__creat");
-
 const buttonControlInfo = document.querySelector(".info__control--button");
-const LEFT_INDENT = 339;
-const TOP_INDENT = 61;
 
 let namePoint = document.querySelector("#namePoint");
 let textPoint = document.querySelector("#textPoint");
@@ -45,7 +44,30 @@ function setPoint(name)
 	return point;
 }
 
-// open pop up edit && delete point
+// point edit && delete point
+MODAL_WIDOW.addEventListener("click", (event) => {
+	let poinID = MODAL_WIDOW.getAttribute("id");
+	if (event.target.classList.contains("button__edit")) {
+		if(confirm("Вы уверены?"))
+		{
+			FIELD.querySelector("#" + poinID).title = MODAL_WIDOW.querySelector("#namePoint").value;
+			FIELD.querySelector("#" + poinID).textContent = MODAL_WIDOW.querySelector("#textPoint").value;
+			FIELD.querySelector("#" + poinID).style.backgroundColor = MODAL_WIDOW.querySelector("#colorPoint").value;
+			MODAL.classList.add(MODAL_DISABLE);
+		}
+	}
+	if (event.target.classList.contains("button__del")) {
+		if(confirm("Вы уверены?"))
+		{
+			FIELD.querySelector("#" + poinID).remove();
+			MODAL_WIDOW.setAttribute("id", "");
+			MODAL.classList.add(MODAL_DISABLE);
+		}
+	}
+});
+
+
+// open pop up - look info point
 FIELD.addEventListener("mouseover", (event) => {
 	if (event.target.classList.contains("point")) {
 		event.target.addEventListener("click", () => {
@@ -80,21 +102,22 @@ FIELD.addEventListener("mouseover", (event) => {
 				}
 			}
 
-			let colorHTMLHex = COLOR.creatHTMLHex();
+			const COLOR_HTML_HEX = COLOR.creatHTMLHex();
 
-			MODALWIDOW.querySelector("#namePoint").value = POINT.title;
-			MODALWIDOW.querySelector("#textPoint").value = POINT.text;
-			MODALWIDOW.querySelector("#colorPoint").value = colorHTMLHex;
-			MODALWIDOW.querySelector(".coord__number--x").textContent = POINT.coordX;
-			MODALWIDOW.querySelector(".coord__number--y").textContent = POINT.coordY;
+			MODAL_WIDOW.setAttribute("id", POINT.id);
+			MODAL_WIDOW.querySelector("#namePoint").value = POINT.title;
+			MODAL_WIDOW.querySelector("#textPoint").value = POINT.text;
+			MODAL_WIDOW.querySelector("#colorPoint").value = COLOR_HTML_HEX;
+			MODAL_WIDOW.querySelector(".coord__number--x").textContent = POINT.coordX;
+			MODAL_WIDOW.querySelector(".coord__number--y").textContent = POINT.coordY;
 
-			MODALWIDOW.querySelector(".buttons").innerHTML =
+			MODAL_WIDOW.querySelector(".buttons").innerHTML =
 				`<button class="button__edit add__button">Изменить</button>
-			<button class="button__dell add__button">Удалить точку</button>`;
+			<button class="button__del add__button">Удалить точку</button>`;
 
-			MODALWIDOW.classList.add("modal__point");
+			MODAL_WIDOW.classList.add("modal__point");
 			buttonCreatPoint.style.display = "none";
-			MODAL.classList.remove(MODALDISABLE);
+			MODAL.classList.remove(MODAL_DISABLE);
 		});
 	}
 });
@@ -134,6 +157,8 @@ FIELD.addEventListener("mouseover", (event) => {
 // open pop up creat point
 FIELD.addEventListener("contextmenu", (e) => {
 	if (!e.target.classList.contains("point")) {
+		buttonCreatPoint.style.display = "inline-block";
+
 		let x = e.pageX - LEFT_INDENT;
 		let y = e.pageY - TOP_INDENT;
 		let coords = creatCord(x, y);
@@ -147,9 +172,9 @@ FIELD.addEventListener("contextmenu", (e) => {
 		document.querySelector(".coord__number--x").textContent = coords[0];
 		document.querySelector(".coord__number--y").textContent = coords[1];
 
-		MODAL.classList.toggle(MODALDISABLE);
-		if (MODALWIDOW.classList.contains("modal__point"))
-			MODALWIDOW.classList.remove("modal__point");
+		MODAL.classList.toggle(MODAL_DISABLE);
+		if (MODAL_WIDOW.classList.contains("modal__point"))
+			MODAL_WIDOW.classList.remove("modal__point");
 	}
 });
 
@@ -161,20 +186,20 @@ buttonCreatPoint.addEventListener("click", () => {
 	addCoockie("id", (1 * getCookie("id")) + 1);
 
 	creatPoint();
-	MODAL.classList.toggle(MODALDISABLE);
+	MODAL.classList.toggle(MODAL_DISABLE);
 	nullInputs();
 
-	if (MODALWIDOW.classList.contains("modal__point"))
-		MODALWIDOW.classList.remove("modal__point");
+	if (MODAL_WIDOW.classList.contains("modal__point"))
+		MODAL_WIDOW.classList.remove("modal__point");
 });
 
 // close pop up
 closeCreatForm.addEventListener("click", () => {
-	MODAL.classList.toggle(MODALDISABLE);
+	MODAL.classList.toggle(MODAL_DISABLE);
 	nullInputs();
 
-	if (MODALWIDOW.classList.contains("modal__point")) {
-		MODALWIDOW.classList.remove("modal__point");
+	if (MODAL_WIDOW.classList.contains("modal__point")) {
+		MODAL_WIDOW.classList.remove("modal__point");
 		buttonCreatPoint.style.display = "inline-block";
 	}
 });
@@ -182,10 +207,10 @@ closeCreatForm.addEventListener("click", () => {
 // close pop up
 document.querySelector(".pop_up__background").addEventListener("click", (e) => {
 	if (e.target.classList.contains("pop_up__background")) {
-		MODAL.classList.add(MODALDISABLE);
+		MODAL.classList.add(MODAL_DISABLE);
 		nullInputs();
-		if (MODALWIDOW.classList.contains("modal__point")) {
-			MODALWIDOW.classList.remove("modal__point");
+		if (MODAL_WIDOW.classList.contains("modal__point")) {
+			MODAL_WIDOW.classList.remove("modal__point");
 			buttonCreatPoint.style.display = "inline-block";
 		}
 	}
@@ -196,12 +221,12 @@ document.body.addEventListener("keyup", function (e) {
 	var key = e.keyCode;
 
 	if (key == 27) {
-		if(MODAL.classList.contains(MODALDISABLE) == false)
+		if(MODAL.classList.contains(MODAL_DISABLE) == false)
 		{
-			MODAL.classList.add(MODALDISABLE);
+			MODAL.classList.add(MODAL_DISABLE);
 			nullInputs();
-			if (MODALWIDOW.classList.contains("modal__point")) {
-				MODALWIDOW.classList.remove("modal__point");
+			if (MODAL_WIDOW.classList.contains("modal__point")) {
+				MODAL_WIDOW.classList.remove("modal__point");
 				buttonCreatPoint.style.display = "inline-block";
 			}
 		}
