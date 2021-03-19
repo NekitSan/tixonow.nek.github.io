@@ -59,16 +59,17 @@ map {
 
 .wrap__container {
 	position: relative;
+	overflow: hidden;
 	width: 560px;
 	height: 560px;
 	margin: 0 auto;
 	cursor: crosshair;
 }
 .wrap__image {
-	position: relative;
+	position: absolute;
 	max-width: inherit;
 	max-height: inherit;
-	z-index: 1000;
+	/* z-index: 1000; */
 	/* Zoom 
 	-moz-transition: all 1.5s ease-out;
 	-o-transition: all 1.5s ease-out;
@@ -78,6 +79,7 @@ map {
 
 #map2d {
 	display: block;
+
 }
 
 .pop_up__background:before {
@@ -220,20 +222,87 @@ map {
 header.container {
 	position: relative;
 	border: 0;
+	background-color: transparent;
+	z-index: 99;
 }
 
 nav {
 	position: absolute;
+	right: 0;
 	background-color: #808080;
 	z-index: 9999;
 }
 
 .page__home__link {
-    color: #4f4f4f;
+	display: block;
+	padding: 5px 7px;
+    color: #fff;
     font-size: 16px;
     text-transform: uppercase;
     font-weight: 600;
+	transition: all ease .6s;
 }
+.page__home__link:hover {
+	color: #1bbdff;
+	background-color: #fff;
+}
+
+.info__control--button {
+	position: absolute;
+	left: 0;
+	padding: 5px 7px;
+	background-color: #1bbdff;
+	color: #fff;
+	border: 0;
+	cursor: pointer;
+}
+.info__control {
+	position: absolute;
+	top: 26px;
+	left: 0;
+	/* top:  */
+	display: grid;
+	grid-template-columns: 1fr;
+	z-index: 9999;
+}
+.info__control__item {
+	padding: 5px 10px;
+	font-size: 16px;
+	background-color: #4f4f4f;
+	color: #fff;
+}
+
+.control__icon {
+	display: inline-block;
+}
+
+.info__control--button:hover .control__icon {
+	color: pink;
+}
+
+.control__icon.active {
+	transform: rotate(180deg);
+}
+
+/* .zoom {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 140px;
+	height: 140px;
+	outline: solid 1px #000;
+	z-index: 999;
+}
+.dot {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 1px;
+	height: 1px;
+	background-color: #fff;
+} */
 
 .disable {
 	position: absolute;

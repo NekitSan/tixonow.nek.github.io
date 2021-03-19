@@ -11,6 +11,13 @@
 		<nav>
 			<a class="page__home__link" href="../../index.html">На главную</a>
 		</nav>
+		<button class="info__control--button">Управление <span class="control__icon">v</span></button>
+		<ul class="info__control disable">
+			<li class="info__control__item">Нажатие правой кнопки мыши на карту - создание точки</li>
+			<li class="info__control__item">Нажатие лувой кнопки мыши на точку - открытие информации о ней</li>
+			<!-- <li class="info__control__item">Двойное нажатие левой кнопки мыши на карте - увеличение изображения</li> -->
+		</ul>
+		
 	</header>
 	<div class="wrapper">
 		<div class="container">
@@ -46,11 +53,12 @@
 					</div>
 				</div>
 			</div>
-			<map class="wrap" id="wrap">	
+			<div class="wrap" id="wrap">	
 				<div class="wrap__container">
+					<!-- <div class='zoom disable'></div> -->
 					<img class="wrap__image" id="map2d" src="https://github.com/NekitSan/ASL_std./blob/master/asl-mapping.ru/www/imager/maps/min/oldmedievalminecraft2-min.jpg?raw=true" alt="map - 2d">
 				</div>
-			</map>
+			</div>
 		</div>
 	</div>
 	<script src="js/script.js" type="text/javascript"></script>

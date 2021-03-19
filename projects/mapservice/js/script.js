@@ -9,6 +9,10 @@ const MODALDISABLE = "pop_up--disable";
 const closeCreatForm = document.querySelector(".button__close");
 const buttonCreatPoint = document.querySelector(".button__creat");
 
+const buttonControlInfo = document.querySelector(".info__control--button");
+const LEFT_INDENT = 339;
+const TOP_INDENT = 61;
+
 let namePoint = document.querySelector("#namePoint");
 let textPoint = document.querySelector("#textPoint");
 let colorPoint = document.querySelector("#colorPoint");
@@ -19,6 +23,11 @@ const map = {
 	coordY: 8960.0
 };
 const maxcoord = 4480;
+
+buttonControlInfo.addEventListener("click", () => {
+	document.querySelector(".info__control").classList.toggle("disable");
+	document.querySelector(".control__icon").classList.toggle("active");
+});
 
 // open pop up edit && delete point
 FIELD.addEventListener("mouseover", (event) => {
@@ -42,11 +51,43 @@ FIELD.addEventListener("mouseover", (event) => {
 	}
 });
 
+// zoom map 
+// FIELD.addEventListener("dblclick", (e) => {
+// 	if (!e.target.classList.contains("point")) {
+// 		const zoom = {
+// 			"translate": (280 * 11) / 100,
+// 			"scale": 1.2
+// 		}
+// 		let x = e.pageX - LEFT_INDENT;
+// 		let y = e.pageY - TOP_INDENT;
+
+// 		if(x < 280 && y < 280)
+// 		{
+// 			e.target.style.transform = `translate(${280 - x + zoom.translate}px, ${280 - y + zoom.translate}px) scale(${zoom.scale})`;
+// 		}
+// 		else if(x > 280 && y < 280)
+// 		{
+// 			e.target.style.transform = `translate(-${x - 280 + zoom.translate}px, ${280 - y + zoom.translate}px) scale(${zoom.scale})`;
+// 		}
+// 		else if(x < 280 && y > 280)
+// 		{
+// 			e.target.style.transform = `translate(${280 - x + zoom.translate}px, -${y - 280 + zoom.translate}px) scale(${zoom.scale})`;
+// 		}
+// 		FIELD.insertAdjacentHTML(
+// 			"afterbegin",
+// 			`<div class="zoom">
+// 				<span class="dot"><span>
+// 			</div>`
+// 			);
+// 		//  scale(${zoom.max})
+// 	}
+// });
+
 // open pop up creat point
 FIELD.addEventListener("contextmenu", (e) => {
 	if (!e.target.classList.contains("point")) {
-		let x = e.pageX - 339;
-		let y = e.pageY - 61;
+		let x = e.pageX - LEFT_INDENT;
+		let y = e.pageY - TOP_INDENT;
 		let coords = creatCord(x, y);
 
 		addCoockie("coordX", coords[0]);
