@@ -5,34 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tixonow.nek</title>
-    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="style/index.min.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul class="menu">
-                <li class="menu__item">
-                    <a href="#" class="menu__link">
+    <header class="container">
+        <nav class="global">
+            <button class="button__global__menu">
+                <svg class="button__global__menu-icon" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m464.883 64.267h-417.766c-25.98 0-47.117 21.136-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.013-21.137-47.149-47.117-47.149z"/><path d="m464.883 208.867h-417.766c-25.98 0-47.117 21.136-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.013-21.137-47.149-47.117-47.149z"/><path d="m464.883 353.467h-417.766c-25.98 0-47.117 21.137-47.117 47.149 0 25.98 21.137 47.117 47.117 47.117h417.766c25.98 0 47.117-21.137 47.117-47.117 0-26.012-21.137-47.149-47.117-47.149z"/></svg>
+                <span class="button__global__menu-title">Меню</span>
+            </button>
+            <ul class="global__menu disable">
+                <li class="global__menu__item">
+                    <a href="index.html" class="global__menu__link">
                         Главная
                     </a>
                 </li>
-                <li class="menu__item">Мои проекты >
-                    <ul class="submmenu">
-                        <li class="submenu__item">
-                            <a href="projects/mapservice/index.html" class="menu__link">Картографический сервис</a>
+                <li class="global__menu__item">
+                    <div class="global__menu__item-title">Мои проекты ></div>
+                    <ul class="global__submmenu">
+                        <li class="global__submmenu__item global__menu__item">
+                            <a href="projects/mapservice/index.html" class="global__menu__link">Картографический сервис</a>
                         </li>
-                        <li class="submenu__item">
-                            <a href="projects/constructor/index.html" class="menu__link">Конструктор товаров</a>
+                        <li class="global__submmenu__item global__menu__item">
+                            <a href="projects/constructor/index.html" class="global__menu__link">Конструктор товаров</a>
                         </li>
-                        <li class="submenu__item">
-                            <a href="projects/modularSlider/index.html" class="menu__link">Слайдер</a>
+                        <li class="global__submmenu__item global__menu__item">
+                            <a href="projects/modularSlider/index.html" class="global__menu__link">Слайдер</a>
                         </li>
                     </ul>
                 </li>
             </ul>
         </nav>
+        <h1 class="logo">Сайт Тихонова Никиты</h1>
     </header>
-    <h1>Сайт Тихонова Никиты</h1>
-    <script src="scripts/index.js"></script>
+    <main class="container">
+    </main>
+    <script src="scripts/app.min.js"></script>
 </body>
 </html>
