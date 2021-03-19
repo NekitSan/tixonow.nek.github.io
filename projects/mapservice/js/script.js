@@ -29,24 +29,72 @@ buttonControlInfo.addEventListener("click", () => {
 	document.querySelector(".control__icon").classList.toggle("active");
 });
 
+function setPoint(name)
+{
+	let point = {
+		"id": name.id,
+		"title": name.title,
+		"text": name.textContent,
+		"coordX": name.dataset.coordX,
+		"coordY": name.dataset.coordY,
+		"positionX": name.style.left,
+		"positionY": name.style.top,
+		"color": name.style.backgroundColor
+	};
+
+	return point;
+}
+
 // open pop up edit && delete point
 FIELD.addEventListener("mouseover", (event) => {
 	if (event.target.classList.contains("point")) {
-		event.target.addEventListener("click", (elem) => {
+		event.target.addEventListener("click", () => {
+
+			const POINT = setPoint(event.target);
+
+			const COLOR = {
+				setRedColor()
+				{
+					let temp = POINT.color.match(/rgb[(][0-5]{0,5}/g);
+					temp = temp.toString().replace(/rgb[(]/g, "");
+					return (1 * temp);
+				},
+				setGreenColor()
+				{
+					let temp = POINT.color.match(/, [0-5]{0,5},/g);
+					temp = temp.toString().replace(/[\s,]/g, "");
+					return (1 * temp);
+				},
+				setBlueColor()
+				{
+					let temp = POINT.color.match(/, [0-5]{0,5}[)]/g);
+					temp = temp.toString().replace(/[\s,)]/g, "");
+					return (1 * temp);
+				},
+				rgbToHex(r, g, b) {
+					return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+				},
+				creatHTMLHex()
+				{
+					return this.rgbToHex(this.setRedColor(), this.setGreenColor(), this.setBlueColor());
+				}
+			}
+
+			let colorHTMLHex = COLOR.creatHTMLHex();
+
+			MODALWIDOW.querySelector("#namePoint").value = POINT.title;
+			MODALWIDOW.querySelector("#textPoint").value = POINT.text;
+			MODALWIDOW.querySelector("#colorPoint").value = colorHTMLHex;
+			MODALWIDOW.querySelector(".coord__number--x").textContent = POINT.coordX;
+			MODALWIDOW.querySelector(".coord__number--y").textContent = POINT.coordY;
+
+			MODALWIDOW.querySelector(".buttons").innerHTML =
+				`<button class="button__edit add__button">Изменить</button>
+			<button class="button__dell add__button">Удалить точку</button>`;
+
 			MODALWIDOW.classList.add("modal__point");
 			buttonCreatPoint.style.display = "none";
-			namePoint.value = getCookie("title");
-			textPoint.value = event.target.textContent;
-			colorPoint.value = getCookie("color");
-
-			// MODALWIDOW.querySelector(".buttons").innerHTML =
-			// 	`<button class="button__edit add__button">Изменить</button>
-			// <button class="button__dell add__button">Удалить точку</button>`;
 			MODAL.classList.remove(MODALDISABLE);
-
-			// console.log(elem.getAttribute("id"));
-			console.log(elem);
-
 		});
 	}
 });
