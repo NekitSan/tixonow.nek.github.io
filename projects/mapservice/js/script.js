@@ -54,6 +54,7 @@ MODAL_WIDOW.addEventListener("click", (event) => {
 			FIELD.querySelector("#" + poinID).textContent = MODAL_WIDOW.querySelector("#textPoint").value;
 			FIELD.querySelector("#" + poinID).style.backgroundColor = MODAL_WIDOW.querySelector("#colorPoint").value;
 			MODAL.classList.add(MODAL_DISABLE);
+			nullInputs();
 		}
 	}
 	if (event.target.classList.contains("button__del")) {
@@ -62,6 +63,7 @@ MODAL_WIDOW.addEventListener("click", (event) => {
 			FIELD.querySelector("#" + poinID).remove();
 			MODAL_WIDOW.setAttribute("id", "");
 			MODAL.classList.add(MODAL_DISABLE);
+			nullInputs();
 		}
 	}
 });
@@ -106,7 +108,7 @@ FIELD.addEventListener("mouseover", (event) => {
 
 			MODAL_WIDOW.setAttribute("id", POINT.id);
 			MODAL_WIDOW.querySelector("#namePoint").value = POINT.title;
-			MODAL_WIDOW.querySelector("#textPoint").value = POINT.text;
+			MODAL_WIDOW.querySelector("#textPoint").value = POINT.text.trim();
 			MODAL_WIDOW.querySelector("#colorPoint").value = COLOR_HTML_HEX;
 			MODAL_WIDOW.querySelector(".coord__number--x").textContent = POINT.coordX;
 			MODAL_WIDOW.querySelector(".coord__number--y").textContent = POINT.coordY;
@@ -180,14 +182,28 @@ FIELD.addEventListener("contextmenu", (e) => {
 
 // close pop up && creat point
 buttonCreatPoint.addEventListener("click", () => {
-	addCoockie("title", namePoint.value);
-	addCoockie("text", textPoint.value);
-	addCoockie("color", colorPoint.value);
 	addCoockie("id", (1 * getCookie("id")) + 1);
 
 	creatPoint();
 	MODAL.classList.toggle(MODAL_DISABLE);
 	nullInputs();
+
+	function creatPoint() {
+		FIELD.insertAdjacentHTML(
+			"afterbegin",
+			`<div class="point" 
+			id="id-${getCookie("id")}" 
+			style="
+			left: ${getCookie("positX")}px; 
+			top: ${getCookie("positY")}px; 
+			background-color: ${colorPoint.value};" 
+			title="${namePoint.value}" 
+			
+			data-coord-x="${getCookie("coordX")}" 
+			data-coord-y="${getCookie("coordY")}">
+			${textPoint.value}</div>`
+		);
+	}
 
 	if (MODAL_WIDOW.classList.contains("modal__point"))
 		MODAL_WIDOW.classList.remove("modal__point");
@@ -233,23 +249,6 @@ document.body.addEventListener("keyup", function (e) {
 	};
 }, false);
 
-function creatPoint() {
-	FIELD.insertAdjacentHTML(
-		"afterbegin",
-		`<div class="point" 
-		id="id-${getCookie("id")}" 
-		style="
-		left: ${getCookie("positX")}px; 
-		top: ${getCookie("positY")}px; 
-		background-color: ${getCookie("color")};" 
-		title="${getCookie("title")}" 
-		 
-		data-coord-x="${getCookie("coordX")}" 
-		data-coord-y="${getCookie("coordY")}">
-		${ getCookie("text")}</div>`
-	);
-}
-
 function editCoord(position) {
 	if (position > maxcoord) {
 		return (position - maxcoord);
@@ -289,4 +288,6 @@ function nullInputs() {
 	namePoint.value = "";
 	textPoint.value = "";
 	colorPoint.value = "#FFFB00";
+	namePoint.style = "";
+	textPoint.style = "";
 }

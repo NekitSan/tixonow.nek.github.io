@@ -24,9 +24,15 @@ input, textarea, button {
 }
 
 textarea {
-	max-width: 100%;
-	text-align: center;
+	resize: both;
+	display: inline-block;
+	overflow: auto;
+	min-width: 150px;
+	max-width: 330px;
+	min-height: 70px;
+	max-height: 440px;
 	padding: 5px 5px;
+	text-align: center;
 }
 
 a {
