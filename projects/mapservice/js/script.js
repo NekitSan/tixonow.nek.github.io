@@ -77,19 +77,19 @@ FIELD.addEventListener("mouseover", (event) => {
 			const COLOR = {
 				setRedColor()
 				{
-					let temp = POINT.color.match(/rgb[(][0-5]{0,5}/g);
-					temp = temp.toString().replace(/rgb[(]/g, "");
+					let temp = POINT.color.match(/rgb\(\d+/g);
+					temp = temp.toString().replace(/rgb\(/g, "");
 					return (1 * temp);
 				},
 				setGreenColor()
 				{
-					let temp = POINT.color.match(/, [0-5]{0,5},/g);
+					let temp = POINT.color.match(/ \d+,/g);
 					temp = temp.toString().replace(/[\s,]/g, "");
 					return (1 * temp);
 				},
 				setBlueColor()
 				{
-					let temp = POINT.color.match(/, [0-5]{0,5}[)]/g);
+					let temp = POINT.color.match(/, \d+\)/g);
 					temp = temp.toString().replace(/[\s,)]/g, "");
 					return (1 * temp);
 				},
