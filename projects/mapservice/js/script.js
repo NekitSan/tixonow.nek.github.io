@@ -5,7 +5,7 @@ const MODAL = document.querySelector(".pop_up__background");
 const MODAL_WIDOW = document.querySelector(".modal");
 const FIELD = document.querySelector(".wrap__image");
 const MODAL_DISABLE = "pop_up--disable";
-const PARAMETER_MAP = document.querySelector(".wrap__image").getBoundingClientRect();
+const PARAMETER_MAP = FIELD.getBoundingClientRect();
 const LEFT_INDENT = Math.floor(PARAMETER_MAP.x);
 const TOP_INDENT = PARAMETER_MAP.y - 0.5;
 

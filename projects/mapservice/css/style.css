@@ -298,10 +298,14 @@ header.container {
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 999;
 }
 .position__cursor__item {
-	width: 60px;
+	padding: 10px 15px;
+	color: #fff;
+}
+.input__coord {
+	width: 80px;
+	border: 0;
 	background-color: transparent;
 	color: #fff;
 }
