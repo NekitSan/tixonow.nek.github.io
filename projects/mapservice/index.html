@@ -8,14 +8,21 @@
 </head>
 <body>
 	<header class="container">
-		
-		<button class="info__control--button">Управление <span class="control__icon">v</span></button>
-		<ul class="info__control disable">
-			<li class="info__control__item">Нажатие <strong>правой</strong> кнопки мыши на карту - создание точки</li>
-			<li class="info__control__item">Нажатие <strong>левой</strong> кнопки мыши на точку - открытие информации о ней</li>
-			<!-- <li class="info__control__item">Двойное нажатие левой кнопки мыши на карте - увеличение изображения</li> -->
-		</ul>
-		
+		<nav>
+			<ul class="menu">
+				<li class="menu__item">
+					<a class="page__home__link" href="../../index.html">На главную</a>
+				</li>
+				<li class="menu__item">
+					<button class="info__control--button">Управление <span class="control__icon">v</span></button>
+					<ul class="info__control disable">
+						<li class="info__control__item">Нажатие <strong>правой</strong> кнопки мыши на карту - создание точки</li>
+						<li class="info__control__item">Нажатие <strong>левой</strong> кнопки мыши на точку - открытие информации о ней</li>
+						<!-- <li class="info__control__item">Двойное нажатие левой кнопки мыши на карте - увеличение изображения</li> -->
+					</ul>
+				</li>
+			</ul>
+		</nav>
 	</header>
 	<div class="wrapper">
 		<div class="container">
@@ -52,8 +59,14 @@
 				</div>
 			</div>
 			<div class="wrap" id="wrap">	
+				<div class="position__cursor">
+					<input class="position__cursor__item" type="text" id="mouseX">
+					<input class="position__cursor__item" type="text" id="mouseY">
+				</div>
 				<div class="wrap__container">
-					<!-- <div class='zoom disable'></div> -->
+					<div class='zoom disable'>
+						<div class="dot"></div>
+					</div>
 					<img class="wrap__image" id="map2d" src="https://github.com/NekitSan/ASL_std./blob/master/asl-mapping.ru/www/imager/maps/min/oldmedievalminecraft2-min.jpg?raw=true" alt="map - 2d">
 				</div>
 			</div>

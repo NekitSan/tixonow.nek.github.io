@@ -3,10 +3,11 @@ document.querySelector(".wrap").oncontextmenu = () => {
 }
 const MODAL = document.querySelector(".pop_up__background");
 const MODAL_WIDOW = document.querySelector(".modal");
-const FIELD = document.querySelector(".wrap__container");
+const FIELD = document.querySelector(".wrap__image");
 const MODAL_DISABLE = "pop_up--disable";
-const LEFT_INDENT = 339;
-const TOP_INDENT = 61;
+const PARAMETER_MAP = document.querySelector(".wrap__image").getBoundingClientRect();
+const LEFT_INDENT = Math.floor(PARAMETER_MAP.x);
+const TOP_INDENT = PARAMETER_MAP.y - 0.5;
 
 const closeCreatForm = document.querySelector(".button__close");
 const buttonCreatPoint = document.querySelector(".button__creat");
@@ -163,7 +164,10 @@ FIELD.addEventListener("contextmenu", (e) => {
 
 		let x = e.pageX - LEFT_INDENT;
 		let y = e.pageY - TOP_INDENT;
+		console.log(x, y);
+
 		let coords = creatCord(x, y);
+		
 
 		addCoockie("coordX", coords[0]);
 		addCoockie("coordY", coords[1]);
@@ -260,17 +264,22 @@ function editCoord(position) {
 }
 
 function creatCord(positionX, positionY) {
+	let finalX,
+		finalY;
+
 	let tempX = map.coordX * 1.00 - ((positionX * 8) * 2);
 	tempX = (tempX - map.coordX) * -1;
 	tempX = editCoord(tempX);
-	tempX = tempX.toFixed(0);
-
+	finalX = Number(tempX.toFixed(0));
+	
+	
 	let tempY = map.coordY * 1.00 - ((positionY * 8) * 2);
 	tempY = (tempY - map.coordY) * -1;
 	tempY = editCoord(tempY);
-	tempY = tempY.toFixed(0);
+	tempY = Number(tempY.toFixed(0));
+	finalY = (tempY > 0 ) ? (tempY + 8) : (tempY - 8);
 
-	return [tempX, tempY];
+	return [finalX, finalY];
 }
 
 function addCoockie(name, value) {
@@ -290,4 +299,33 @@ function nullInputs() {
 	colorPoint.value = "#FFFB00";
 	namePoint.style = "";
 	textPoint.style = "";
+}
+
+FIELD.onmousemove = mouseMove;
+
+function mouseMove(event){ 
+	event = fixEvent(event);
+	let coord = creatCord( (event.pageX - LEFT_INDENT), (event.pageY - TOP_INDENT) );
+	document.getElementById('mouseX').value = coord[0];
+	document.getElementById('mouseY').value = coord[1];
+	
+}
+function fixEvent(e) {
+	// получить объект событие для IE
+	e = e || window.event;
+
+	// добавить pageX/pageY для IE
+	if ( e.pageX == null && e.clientX != null ) {
+		let html = document.documentElement;
+		let body = document.body;
+		e.pageX = e.clientX + (html && html.scrollLeft || body && body.scrollLeft || 0) - (html.clientLeft || 0);
+		e.pageY = e.clientY + (html && html.scrollTop || body && body.scrollTop || 0) - (html.clientTop || 0);
+	}
+
+	// добавить which для IE
+	if (!e.which && e.button) {
+		e.which = e.button & 1 ? 1 : ( e.button & 2 ? 3 : ( e.button & 4 ? 2 : 0 ) );
+	}
+
+	return e;
 }
