@@ -1,0 +1,201 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    background-color: #4f4f4f;
+}
+
+.slider {
+    position: relative;
+    width: 900px;
+    margin: 0 auto;
+    user-select: none;
+}
+.hidden {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+.image--custom {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.slider__preview {
+    width: 100%;
+    height: 420px;
+    margin-bottom: 40px;
+    background-color: #fff;
+}
+.slider__preview--visible {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 620px;
+    height: inherit;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.slider__control {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.slider--button__left,
+.slider--button__right {
+    position: absolute;
+    top: 0;
+    height: 420px;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.03);
+    cursor: pointer;
+}
+.slider--button__left {
+    left: 0;
+    border-right: solid 5px rgba(255, 255, 255, 0.1);
+}
+.slider--button__right {
+    right: 0;
+    border-left: solid 5px rgba(255, 255, 255, 0.1);
+}
+.slider--button__left::after,
+.slider--button__right:after {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 30px;
+    height: 30px;
+}
+.slider--button__left:hover,
+.slider--button__right:hover {
+    background-color: rgba(0, 0, 0, 0.07);
+}
+.slider--button__left::after {
+    content: url(../image/left.svg);
+    left: 0;
+}
+.slider--button__right::after {
+    content: url(../image/right.svg);
+    right: 0;
+}
+
+.slider--list__checkbox {
+    position: absolute;
+    top: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    height: 40px;
+    background-color: #2C2F38;
+    z-index: 10;
+}
+.slider__check {
+	position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	width: 20px;
+	height: 20px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.slider__check--input {
+	position: absolute;
+	appearance: none;
+}
+.slider__check--custom {
+	width: 20px;
+	height: 20px;
+    background-image: url(../image/check-off.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50px;
+    transition: background-image ease .3s;
+}
+.slider__checkbox--active .slider__check--custom,
+.slider__check--active .slider__check--custom {
+    background-image: url(../image/check-on.svg);
+}
+.slider__check--custom:hover {
+    background-image: url(../image/check-hov.svg);
+}
+
+.slider__list {
+	width: 900px;
+	height: 68px; /* 90px 68px */
+	padding: 10px;
+    background-color: #2C2F38;
+    border-top: solid 1px #A5A5A5;
+    border-bottom: solid 1px #A5A5A5;
+}
+.slider__list--fixed {
+	position: relative;
+	width: 100%;
+	height: 100%;
+    background-color: #2C2F38;
+    overflow: hidden;
+}
+/* scroll */
+.slider__list--scroll.scroll {
+    max-width: 900px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    border-radius: 5px;
+}
+.scroll::-webkit-scrollbar {
+	height: 9px;
+    min-width: 10px;
+	background-color: #fff;
+    border-radius: 5px;
+}
+.scroll::-webkit-scrollbar-button {
+	width: 0;
+	height: 0;
+	background-color: transparent;
+}
+.scroll::-webkit-scrollbar-thumb {
+	background-color: #4f4f4f;
+    border-radius: 5px;
+}
+/* scroll */
+.slider__list--scroll {
+    position: absolute;
+	display: flex;
+	flex-wrap: nowrap;
+	align-content: flex-start;
+	gap: 10px;
+	height: inherit;
+}
+.slider__slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 64px;
+    height: 45px;
+    background-color: #2C2F38;
+    border: solid 1px #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.slider__slide:hover {
+    border: solid 1px #708090;
+}
+.slider__slide--active {
+    border: solid 1px #7aa7d4;
+}

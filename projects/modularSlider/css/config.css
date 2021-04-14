@@ -20,6 +20,40 @@ header {
     display: flex;
     gap: 10px;
 }
+.menu__item.menu--list {
+    position: relative;
+    cursor: pointer;
+}
+.menu__item.menu--list::after {
+    content: url(../image/vector.svg);
+    position: absolute;
+    top: 9px;
+    right: 6px;
+    width: 12px;
+    height: 6px;
+}
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: slategray;
+    visibility: hidden;
+    z-index: 999;
+    opacity: 0;
+}
+.menu__item.menu--list:hover {
+    background-color: #777;
+}
+.menu__item.menu--list:hover .submenu {
+    visibility: visible;
+    opacity: 1;
+}
+.menu__item.menu--list .menu__link {
+    padding: 10px 26px 10px 6px;
+}
+
+
 .menu__link {
     display: block;
     padding: 10px 12px;
@@ -28,7 +62,7 @@ header {
     transition: all ease .3s;
 }
 
-.menu__link:hover {
+a.menu__link:hover {
     color:bisque;
 }
 
@@ -38,6 +72,7 @@ header {
 }
 
 .disable {
+    display: none;
     color: #333;
 }
 .disable:hover {

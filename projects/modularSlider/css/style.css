@@ -75,3 +75,37 @@
     }
 
 }
+
+.footer {
+    color: #4F4F0C;
+}
+.upd {
+    background-color: rgba(1,1,1, .3);
+    padding: 10px;
+}
+.upd__item span {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+}
+.upd__item time {
+    font-size: 11px;
+    padding-left: 5px;
+}
+.upd__item {
+    margin-bottom: 10px;
+}
+.udp__description {
+    padding-left: 20px;
+}
+.udp__description__item::before {
+    content: "- ";
+}
+
+.disable {
+    display: none;
+    color: #333;
+}
+.disable:hover {
+    color: #333;
+}

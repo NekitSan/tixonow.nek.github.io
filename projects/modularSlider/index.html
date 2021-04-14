@@ -20,26 +20,33 @@
                     <a href="index.html" class="menu__link menu__link--action">Home</a>
                 </li>
                 <li class="menu__item">
-                    <a href="options/multipleuse.html" class="menu__link">Multipleuse slider</a>
+                    <a href="options/full/index.html" class="menu__link">Full slider</a>
                 </li>
-                <li class="menu__item">
-                    <a href="options/full.html" class="menu__link">Full slider</a>
+                <li class="menu__item menu--list disable">
+                    <span class="menu__link">Middle slider</span>
+                    <ul class="submenu">
+                        <li class="submenu__item"><a href="options/middle/one/index.html" class="menu__link">One</a></li>
+                        <li class="submenu__item"><a href="options/middle/two/index.html" class="menu__link">Two</a></li>
+                        <li class="submenu__item"><a href="options/middle/three/index.html" class="menu__link">Three</a></li>
+                    </ul>
                 </li>
-                <li class="menu__item">
-                    <a href="options/middle.html" class="menu__link">Middle slider</a>
-                </li>
-                <li class="menu__item">
-                    <a href="options/ease.html" class="menu__link">Ease slider</a>
+                <li class="menu__item menu--list disable">
+                    <span class="menu__link">Ease slider</span>
+                    <ul class="submenu">
+                        <li class="submenu__item"><a href="options/ease/one/index.html" class="menu__link">One</a></li>
+                        <li class="submenu__item"><a href="options/ease/two/index.html" class="menu__link">Two</a></li>
+                        <li class="submenu__item"><a href="options/ease/three/index.html" class="menu__link">Three</a></li>
+                    </ul>
                 </li>
             </ul>
         </nav>
     </header>
     <main class="container">
         <div class="block__info">
-            Извиняюсь за неформальность и скованное описание, не умею я писать эти документации..((
+            Данный проект был сделан для публичного использования.
         </div>
         <article class="banner">
-            <h1 class="title">Version sliders - 1.0.0</h1>
+            <h1 class="title">Version sliders - 1.1.0</h1>
             <section class="info__line">
                 <h3 class="info__line__title">Описание:</h3>
                 <p class="text">
@@ -58,16 +65,7 @@
                     На чисто JavaScript.
                 </p>
             </section>
-            <section class="banner__tile">
-                <h2 class="banner__tile__title">Multipleuse slider</h2>
-                <div class="banner__tile__description">
-                    <p class="text">Пока находится в разработке и проектировании.</p>
-                    <p class="text">
-                        Данный слайдер, задумывается как модульный, и будет реализоваться через import-files.
-                    </p>
-                </div>
-                <img src="image/full-multe.png" alt="Image multipleuse slider" class="banner__tile__image">
-            </section>
+            <!-- documentation -->
             <section class="banner__tile">
                 <h2 class="banner__tile__title">Full slider</h2>
                 <div class="banner__tile__description">
@@ -82,7 +80,7 @@
                 </div>
                 <img src="image/full-multe.png" alt="Image full slider" class="banner__tile__image">
             </section>
-            <section class="banner__tile">
+            <section class="banner__tile disable">
                 <h2 class="banner__tile__title">Middle slider</h2>
                 <div class="banner__tile__description">
                     <p class="text">
@@ -95,7 +93,7 @@
                 </div>
                 <img src="image/middle.png" alt="Image middle slider" class="banner__tile__image">
             </section>
-            <section class="banner__tile">
+            <section class="banner__tile disable">
                 <h2 class="banner__tile__title">Ease slider</h2>
                 <div class="banner__tile__description">
                     <p class="text">
@@ -110,5 +108,38 @@
         </article>
         <!-- documentation -->
     </main>
+    <footer class="footer container">
+        <ul class="upd">
+            <li class="upd__item">
+                <span>UPD 1.1.0</span>
+                <time>06.04.2020 | 00:00</time>
+                <ul class="udp__description">
+                    <li class="udp__description__item">
+                        Был полностью переосмыслен и переделан проект
+                    </li>
+                    <li class="udp__description__item">
+                        Изменён стиль слайдера
+                    </li>
+                    <li class="udp__description__item">
+                        Изменилась иерархия папок и файлов
+                    </li>
+                </ul>
+            </li>
+            <li class="upd__item">
+                <span>Планы: UPD 1.1.1</span>
+                <ul class="udp__description">
+                    <li class="udp__description__item">
+                        Добавить вариации слайдеров разной комплектации
+                    </li>
+                    <li class="udp__description__item">
+                        Изменить иерархию папок и файлов
+                    </li>
+                    <li class="udp__description__item">
+                        Сделать документацию
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </footer>
 </body>
 </html>

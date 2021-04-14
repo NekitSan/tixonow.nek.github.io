@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форматирование текста</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="container">
+        <h1 class="title">Форматирование текста</h1>
+        <div class="formatting">
+            <div class="container__text">
+                <div class="source">
+                    <label for="source">Исходный текст:</label>
+                    <textarea rows="10" cols="40" id="source" autofocus></textarea>
+                    <div class="text__number">
+                        Колисчество символов: <span id="source-number">0</span> 
+                    </div>
+                </div>
+                <div class="result">
+                    <label for="result">Отформатированный текст:</label>
+                    <textarea rows="10" cols="40" id="result"></textarea>
+                    <div class="text__number">
+                        Колисчество символов: <span id="result-number">0</span> 
+                    </div>
+                    <button class="controll__item__button" id="button--copy">Copy text</button>
+                </div>
+            </div>
+            <div class="container__control">
+                <div class="controll__item">
+                    <label class="controll__item__title" for="button__no_space">Без пробелов</label>
+                    <button class="controll__item__button" id="button__no_space">Применить</button>
+                    <button class="controll__item__button--add" id="no_space--add">+</button>
+                </div>
+                <div class="controll__item">
+                    <label class="controll__item__title" for="button__hyphen_insertion">Подставка "-"</label>
+                    <button class="controll__item__button" id="button__hyphen_insertion">Применить</button>
+                    <button class="controll__item__button--add" id="hyphen_insertion--add">+</button>
+                </div>
+                <div class="controll__item">
+                    <label class="controll__item__title" for="button__hyphen_lowerinsertion">Подставка "_"</label>
+                    <button class="controll__item__button" id="button__hyphen_lowerinsertion">Применить</button>
+                    <button class="controll__item__button--add" id="hyphen_lowerinsertion--add">+</button>
+                </div>
+                <div class="controll__item">
+                    <label class="controll__item__title" for="button__hyphen_diagonalinsertion">Подставка "/"</label>
+                    <button class="controll__item__button" id="button__hyphen_diagonalinsertion">Применить</button>
+                    <button class="controll__item__button--add" id="hyphen_diagonalinsertion--add">+</button>
+                </div>
+                <div class="controll__item">
+                    <label class="controll__item__title" for="button__uppercase">В верхнем регистре</label>
+                    <button class="controll__item__button" id="button__uppercase">Применить</button>
+                    <button class="controll__item__button--add" id="uppercase--add">+</button>
+                </div>
+                <div class="controll__item">
+                    <label class="controll__item__title" for="button__lowercase">В нижнем регистре</label>
+                    <button class="controll__item__button" id="button__lowercase">Применить</button>
+                    <button class="controll__item__button--add" id="lowercase--add">+</button>
+                </div>
+                <div class="controll__item">
+                    <button class="controll__item__button" id="button__drop">Сбросить</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/app.js"></script>
+</body>
+</html>

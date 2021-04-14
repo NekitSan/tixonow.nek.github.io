@@ -1,27 +1,28 @@
 let fullSlider = modulesSlider(".slider--full");
+
 fullSlider();
 
 function modulesSlider(bodySlider) {
-    let slider = document.querySelector(bodySlider);
 
-    let preview = slider.querySelector(".slider_preview__image");
+    let slider   = document.querySelector(bodySlider);
 
+    let preview  = slider.querySelector(".slider__preview--img");
     let oneSlide = slider.querySelector(".slider__slide img");
 
-    let buttonLeft = slider.querySelector(".slider__button_left");
-    let buttonRight = slider.querySelector(".slider__button_right");
+    let buttonLeft  = slider.querySelector(".slider--button__left");
+    let buttonRight = slider.querySelector(".slider--button__right");
 
-    let checkbox = "slider__checkbox";
-    let checkboxList = slider.querySelector(".slider__list_checkbox");
-    let checkboxCollection = slider.querySelector(".slider__list_checkbox").children;
+    let checkbox           = "slider__check";
+    let checkboxList       = slider.querySelector(".slider--list__checkbox");
+    let checkboxCollection = slider.querySelector(".slider--list__checkbox").children;
 
-    let slide = "slider__slide";
-    let slideList = slider.querySelector(".slider_list__slides");
+    let slide           = "slider__slide";
+    let slideList       = slider.querySelector(".slider__list--scroll");
     let slideCollection = slideList.children;
     let slideListNumber = slideCollection.length;
 
-    let checkboxAct = "slider__checkbox--active";
-    let slideAct = "slider__slide--active";
+    const CHECK_ACTIVE = "slider__check--active";
+    const SLIDE_ACTIVE = "slider__slide--active";
 
     function slideAttribute(step)
     {
@@ -35,20 +36,20 @@ function modulesSlider(bodySlider) {
 
     function slideMove(stepDel, stepAdd)
     {
-        slideCollection[stepDel].classList.remove(slideAct);
-        slideCollection[stepAdd].classList.add(slideAct);
+        slideCollection[stepDel].classList.remove(SLIDE_ACTIVE);
+        slideCollection[stepAdd].classList.add(SLIDE_ACTIVE);
     }
 
     function checkboxMove(stepDel, stepAdd)
     {
-        checkboxCollection[stepDel].classList.remove(checkboxAct);
-        checkboxCollection[stepAdd].classList.add(checkboxAct);
+        checkboxCollection[stepDel].classList.remove(CHECK_ACTIVE);
+        checkboxCollection[stepAdd].classList.add(CHECK_ACTIVE);
     }
 
     function leftMove() {
         for (let i = 0; i < slideListNumber; i++)
         {
-            if (slideCollection[i].classList.contains(slideAct) == true) {
+            if (slideCollection[i].classList.contains(SLIDE_ACTIVE) == true) {
                 if (i == 0) {
                     slideAttribute(slideListNumber - 1);
                     checkboxMove(i, slideListNumber - 1);
@@ -66,7 +67,7 @@ function modulesSlider(bodySlider) {
     function RightMove() {
         for (let i = 0; i < slideListNumber; i++)
         {
-            if (slideCollection[i].classList.contains(slideAct) == true) {
+            if (slideCollection[i].classList.contains(SLIDE_ACTIVE) == true) {
                 if ( i == (slideListNumber - 1) ) {
                     slideAttribute(0);
                     checkboxMove(i, 0);
@@ -83,13 +84,14 @@ function modulesSlider(bodySlider) {
 
     function checkboxAction(event)
     {
-        if(event.classList.contains(checkboxAct) == false)
+        console.log(event);
+        if(event.classList.contains(CHECK_ACTIVE) == false)
         {
             let ArrCkecks = Array.prototype.slice.call( checkboxCollection );
             let ArrImages = Array.prototype.slice.call( slideCollection );
 
             let indexArrcheckbox  = ArrCkecks.indexOf( event );
-            let indexArrSlide = ArrImages.indexOf( slider.querySelector( "." + slideAct) );
+            let indexArrSlide = ArrImages.indexOf( slider.querySelector( "." + SLIDE_ACTIVE) );
             
 
             slideAttribute(indexArrcheckbox);
@@ -100,12 +102,12 @@ function modulesSlider(bodySlider) {
 
     function slideAction(event)
     {
-        if(event.classList.contains(slideAct) == false)
+        if(event.classList.contains(SLIDE_ACTIVE) == false)
         {
             let ArrCkecks = Array.prototype.slice.call( checkboxCollection );
             let ArrImages = Array.prototype.slice.call( slideCollection );
 
-            let indexArrcheckbox  = ArrCkecks.indexOf( slider.querySelector("." + checkboxAct) );
+            let indexArrcheckbox  = ArrCkecks.indexOf( slider.querySelector("." + CHECK_ACTIVE) );
             let indexArrSlide = ArrImages.indexOf( event );
 
             slideAttribute(indexArrSlide);
@@ -120,21 +122,22 @@ function modulesSlider(bodySlider) {
         preview.setAttribute("src", oneSlide.getAttribute("src"));
 
         // add active class slide
-        slideCollection[0].classList.add(slideAct);
-
-        // show slide list
-        slider.querySelector(".slider_list").classList.toggle("hidden");
+        slideCollection[0].classList.add(SLIDE_ACTIVE);
 
         // add checkbox
         for(let i = 0; i < slideListNumber; i++)
         {
-            checkboxList.innerHTML += '<div class="slider__checkbox"></div>';
+            checkboxList.innerHTML += 
+            `<label class="slider__check">
+                <input type="checkbox" class="slider__check--input">
+                <span class="slider__check--custom"></span>
+            </label>`;
         }
 
         // add active class checkbox
         if(slider.querySelector("."+checkbox))
         {
-            checkboxCollection[0].classList.add(checkboxAct);
+            checkboxCollection[0].classList.add(CHECK_ACTIVE);
         }
 
         buttonLeft.addEventListener("click", leftMove);
@@ -143,6 +146,9 @@ function modulesSlider(bodySlider) {
         checkboxList.addEventListener("click", (elem)=>{
             if(elem.target.classList.contains(checkbox))
                 checkboxAction(elem.target);
+            else if(elem.target.parentNode.classList.contains(checkbox))
+                checkboxAction(elem.target.parentNode);
+                
         });
 
         slideList.addEventListener("click", (elem)=>{

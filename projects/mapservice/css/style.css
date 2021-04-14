@@ -50,6 +50,7 @@ ul,li {
 }
 
 .container {
+	position: relative;
 	max-width: 1120px;
 	max-height: 562px;
 	margin: 0 auto;
@@ -232,22 +233,6 @@ header.container {
 	z-index: 99;
 }
 
-nav {
-	position: absolute;
-	right: 0;
-	background-color: #808080;
-	z-index: 9999;
-}
-
-.page__home__link {
-	display: block;
-	padding: 5px 7px;
-    color: #fff;
-    font-size: 16px;
-    text-transform: uppercase;
-    font-weight: 600;
-	transition: all ease .6s;
-}
 .page__home__link:hover {
 	color: #1bbdff;
 	background-color: #fff;
