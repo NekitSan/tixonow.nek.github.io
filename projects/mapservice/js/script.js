@@ -6,7 +6,7 @@ const MODAL_WIDOW = document.querySelector(".modal");
 const FIELD = document.querySelector(".wrap__image");
 const MODAL_DISABLE = "pop_up--disable";
 const PARAMETER_MAP = FIELD.getBoundingClientRect();
-const LEFT_INDENT = Math.floor(PARAMETER_MAP.x);
+const LEFT_INDENT = leftIndent();
 const TOP_INDENT = PARAMETER_MAP.y - 0.5;
 
 const closeCreatForm = document.querySelector(".button__close");
@@ -328,4 +328,20 @@ function fixEvent(e) {
 	}
 
 	return e;
+}
+
+function leftIndent()
+{
+    const windowDoc = document.documentElement.clientWidth;
+    const windowMap = document.querySelector(".wrap").clientWidth;
+    const widthMap = document.querySelector(".wrap__container").clientWidth;
+
+    let temp1, temp2, result;
+
+    temp1 = (windowDoc - windowMap) / 2;
+    temp2 = (windowMap - widthMap) / 2;
+
+    result = Math.floor(temp1 + temp2);
+
+    return result;
 }
