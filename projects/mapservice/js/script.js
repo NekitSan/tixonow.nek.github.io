@@ -125,38 +125,6 @@ FIELD.addEventListener("mouseover", (event) => {
 	}
 });
 
-// zoom map 
-// FIELD.addEventListener("dblclick", (e) => {
-// 	if (!e.target.classList.contains("point")) {
-// 		const zoom = {
-// 			"translate": (280 * 11) / 100,
-// 			"scale": 1.2
-// 		}
-// 		let x = e.pageX - LEFT_INDENT;
-// 		let y = e.pageY - TOP_INDENT;
-
-// 		if(x < 280 && y < 280)
-// 		{
-// 			e.target.style.transform = `translate(${280 - x + zoom.translate}px, ${280 - y + zoom.translate}px) scale(${zoom.scale})`;
-// 		}
-// 		else if(x > 280 && y < 280)
-// 		{
-// 			e.target.style.transform = `translate(-${x - 280 + zoom.translate}px, ${280 - y + zoom.translate}px) scale(${zoom.scale})`;
-// 		}
-// 		else if(x < 280 && y > 280)
-// 		{
-// 			e.target.style.transform = `translate(${280 - x + zoom.translate}px, -${y - 280 + zoom.translate}px) scale(${zoom.scale})`;
-// 		}
-// 		FIELD.insertAdjacentHTML(
-// 			"afterbegin",
-// 			`<div class="zoom">
-// 				<span class="dot"><span>
-// 			</div>`
-// 			);
-// 		//  scale(${zoom.max})
-// 	}
-// });
-
 // open pop up creat point
 FIELD.addEventListener("contextmenu", (e) => {
 	if (!e.target.classList.contains("point")) {
