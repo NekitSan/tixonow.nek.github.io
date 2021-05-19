@@ -72,6 +72,10 @@ map {
 	margin: 0 auto;
 	cursor: crosshair;
 }
+.wrap__image__container {
+	width: 100%;
+	height: 100%;
+}
 .wrap__image {
 	position: absolute;
 	max-width: inherit;

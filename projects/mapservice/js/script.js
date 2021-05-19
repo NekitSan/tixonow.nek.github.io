@@ -3,7 +3,7 @@ document.querySelector(".wrap").oncontextmenu = () => {
 }
 const MODAL = document.querySelector(".pop_up__background");
 const MODAL_WIDOW = document.querySelector(".modal");
-const FIELD = document.querySelector(".wrap__image");
+const FIELD = document.querySelector(".wrap__image__container");
 const MODAL_DISABLE = "pop_up--disable";
 const PARAMETER_MAP = FIELD.getBoundingClientRect();
 const LEFT_INDENT = leftIndent();
@@ -163,8 +163,7 @@ FIELD.addEventListener("contextmenu", (e) => {
 		buttonCreatPoint.style.display = "inline-block";
 
 		let x = e.pageX - LEFT_INDENT;
-		let y = e.pageY - TOP_INDENT;
-		console.log(x, y);
+		let y = e.pageY - TOP_INDENT
 
 		let coords = creatCord(x, y);
 		
